@@ -24,6 +24,12 @@ class ProductSerializer(serializers.ModelSerializer):
         model = Product
         fields = '__all__'
 
+class ProductDetailSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model =Product
+        fields = ('id', 'title','category','brands','old_price','dicription')
+
 
 class StorageSerializer(serializers.ModelSerializer):
     class Meta:

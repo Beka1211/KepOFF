@@ -1,5 +1,4 @@
 from django.db import models
-from user.models import MyUserManager,MyUser
 
 class Category(models.Model):
     title = models.CharField(max_length=255)
@@ -18,6 +17,9 @@ class Brand(models.Model):
 
 class Size(models.Model):
     size_name = models.CharField(max_length=10)
+
+    def __str__(self):
+        return self.size_name
 
 
 class Product(models.Model):
@@ -45,12 +47,10 @@ class Storage(models.Model):
 
 
 class Favorite(models.Model):
-    #user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
 
 
 class Basket(models.Model):
-    #user = models.ForeignKey(User, on_delete=models.CASCADE)
     storage = models.ManyToManyField(Storage)
     total_price = models.DecimalField(max_digits=12, decimal_places=2)
     quantity = models.PositiveIntegerField(default=0)
@@ -58,7 +58,6 @@ class Basket(models.Model):
 
 
 class Order(models.Model):
-    #user = models.ForeignKey(User,on_delete=models.CASCADE)
     total_price = models.DecimalField(max_digits=12, decimal_places=2)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
